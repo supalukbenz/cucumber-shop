@@ -33,4 +33,17 @@ public class Order {
         return total;
     }
 
+    public int getTotalStock(Product p) {
+        int stock = 0;
+        for (OrderItem item : items) {
+            if(item.getProd().equals(p)) stock = item.getInventory();
+        }
+        return stock;
+    }
+
+    public String isFulfill(Product p){
+        if(getTotalStock(p) <= 0) return "fulfill";
+        else return "not fulfill";
+    }
+
 }

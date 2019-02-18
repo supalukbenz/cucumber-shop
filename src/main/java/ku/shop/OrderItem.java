@@ -5,15 +5,23 @@ public class OrderItem {
     private Product prod;
 
     public OrderItem(Product prod, int quantity) {
-        if (quantity <= 0)
-            throw new IllegalArgumentException("OrderItem quantity must be positive");
+        if (quantity <= 0 || prod.getStock() < quantity)
+            this.quantity = 0;
+        else this.quantity = quantity;
 
         this.prod = prod;
-        this.quantity = quantity;
     }
 
     public double getSubtotal() {
         return prod.getPrice() * quantity;
+    }
+
+    public int getInventory() {
+        return prod.getStock() - quantity;
+    }
+
+    public Product getProd() {
+        return prod;
     }
 
 }
